@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>header </title>
+    
+</head>
+
+<body>
+    <div class="bg-animation"></div>
+
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav">
+            <div class="logo">heading </div>
+            <div class="nav-links">
+                <button class="nav-btn active" onclick="showSection('home')">Home</button>
+                <button class="nav-btn" onclick="showSection('videos')">Videos</button>
+                <button class="nav-btn" onclick="showSection('stories')">Stories</button>
+                <button class="nav-btn" onclick="showSection('trending')">Trending</button>
+                <button class="nav-btn admin-btn" onclick="showSection('admin')">Admin</button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Home Section -->
+        <section id="home" class="section active">
+            <div class="hero">
+                <div class="hero-content">
+                    <h1>ViralKand</h1>
+                    <p>Discover, Share & Create Viral Content</p>
+                    <div class="cta-buttons">
+                        <button class="cta-btn" onclick="showSection('videos')">🎬 Watch Videos</button>
+                        <button class="cta-btn" onclick="showSection('stories')">📖 Read Stories</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="filter-section">
+                <button class="filter-btn active" onclick="filterContent('all')">All</button>
+                <button class="filter-btn" onclick="filterContent('viral')">🔥 Viral</button>
+                <button class="filter-btn" onclick="filterContent('trending')">📈 Trending</button>
+                <button class="filter-btn" onclick="filterContent('comedy')">😂 Comedy</button>
+                <button class="filter-btn" onclick="filterContent('music')">🎵 Music</button>
+                <button class="filter-btn" onclick="filterContent('dance')">💃 Dance</button>
+            </div>
+
+            <div class="video-grid" id="homeVideoGrid">
+                <!-- Content will be populated by JavaScript -->
+            </div>
+        </section>
+
+        <!-- Videos Section -->
+        <section id="videos" class="section">
+            <h2 style="font-size: 2rem; margin-bottom: 2rem; text-align: center;">📹 Video Collection</h2>
+
+            <div class="filter-section">
+                <button class="filter-btn active" onclick="filterVideos('all')">All Videos</button>
+                <button class="filter-btn" onclick="filterVideos('short')">Short Videos</button>
+                <button class="filter-btn" onclick="filterVideos('long')">Long Videos</button>
+                <button class="filter-btn" onclick="filterVideos('popular')">Popular</button>
+            </div>
+
+            <div class="video-grid" id="videoGrid">
+            </div>
+        </section>
+
+        <!-- Stories Section -->
+        <section id="stories" class="section">
+            <h2 style="font-size: 2rem; margin-bottom: 2rem; text-align: center;">📖 Stories</h2>
+
+            <div class="stories-container" id="storiesContainer">
+            </div>
+
+            <div class="video-grid" id="storyGrid">
+            </div>
+        </section>
+
+        <!-- Trending Section -->
+        <section id="trending" class="section">
+            <h2 style="font-size: 2rem; margin-bottom: 2rem; text-align: center;">🔥 Trending Now</h2>
+
+            <div class="video-grid" id="trendingGrid">
+                <!-- Trending content will be populated here -->
+            </div>
+        </section>
+
+        <!-- Admin Panel -->
+        <section id="admin" class="section">
+            <div class="admin-panel">
+                <h2 style="font-size: 2rem; margin-bottom: 2rem; text-align: center;">🛠️ Admin Panel</h2>
+
+                <form class="admin-form" onsubmit="uploadContent(event)">
+                    <div class="form-group">
+                        <label class="form-label">Content Type</label>
+                        <select class="form-input" id="contentType" onchange="toggleContentFields()">
+                            <option value="video">Video</option>
+                            <option value="story">Story</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Title</label>
+                        <input type="text" class="form-input" id="contentTitle" placeholder="Enter title..." required>
+                    </div>
+
+                    <div class="form-group" id="videoUrlGroup">
+                        <label class="form-label">Video URL</label>
+                        <input type="url" class="form-input" id="videoUrl" placeholder="https://example.com/video.mp4">
+                    </div>
+
+                    <div class="form-group" id="storyContentGroup" style="display: none;">
+                        <label class="form-label">Story Content</label>
+                        <textarea class="form-input form-textarea" id="storyContent"
+                            placeholder="Write your story here..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Category</label>
+                        <select class="form-input" id="contentCategory">
+                            <option value="viral">Viral</option>
+                            <option value="comedy">Comedy</option>
+                            <option value="music">Music</option>
+                            <option value="dance">Dance</option>
+                            <option value="trending">Trending</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Tags (comma-separated)</label>
+                        <input type="text" class="form-input" id="contentTags" placeholder="viral, funny, trending">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Description</label>
+                        <textarea class="form-input" id="contentDescription"
+                            placeholder="Describe your content..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Thumbnail URL</label>
+                        <input type="url" class="form-input" id="thumbnailUrl"
+                            placeholder="https://example.com/thumbnail.jpg">
+                    </div>
+
+                    <button type="submit" class="upload-btn">🚀 Upload Content</button>
+                    <button type="button" class="upload-btn" onclick="authenticateGoogleDrive();">🔒 Login with
+                        Google</button>
+                    <button type="button" class="upload-btn" onclick="uploadToDriveAndSave(event)">🚀 Upload to Google
+                        Drive</button>
+
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <!-- Video Modal -->
+    <div id="videoModal" class="modal">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeModal()">&times;</button>
+            <div class="video-player" id="videoPlayer">
+                <div style="text-align: center;">
+                    <div class="loading"></div>
+                    <p style="margin-top: 1rem;">Loading video...</p>
+                </div>
+            </div>
+            <div class="video-controls">
+                <button class="control-btn" onclick="playVideo()">▶️ Play</button>
+                <button class="control-btn" onclick="shareToInstagram()">📱 Share to Instagram</button>
+                <button class="control-btn" onclick="downloadVideo()">⬇️ Download</button>
+            </div>
+            <div id="videoDetails" style="margin-top: 2rem;">
+                <h3 id="modalTitle"></h3>
+                <p id="modalDescription" style="margin-top: 1rem; opacity: 0.8;"></p>
+                <div id="modalTags" style="margin-top: 1rem;"></div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- UPDATE THE TRENDING SECTION HTML -->
+    <section id="trending" class="section">
+        <h2 style="font-size: 2rem; margin-bottom: 2rem; text-align: center;">🔥 Trending Now</h2>
+
+        <div class="trending-container" id="trendingContainer">
+            <video class="trending-video" id="trendingVideo" autoplay loop muted></video>
+
+            <div class="trending-overlay">
+                <div class="trending-title" id="trendingTitle">Video Title</div>
+                <div class="trending-stats">
+                    <span id="trendingViews">0 views</span>
+                    <span id="trendingLikes">0 likes</span>
+                </div>
+                <div class="video-tags" id="trendingTags">
+                    <!-- Tags will be populated here -->
+                </div>
+            </div>
+
+            <div class="trending-actions">
+                <button class="action-btn like-btn" id="likeBtn" onclick="toggleLike()">
+                    ❤️
+                </button>
+                <button class="action-btn" onclick="shareVideo()">
+                    📤
+                </button>
+                <button class="action-btn" onclick="downloadCurrentVideo()">
+                    ⬇️
+                </button>
+            </div>
+
+            <div class="navigation-dots" id="navigationDots">
+                <!-- Dots will be populated here -->
+            </div>
+        </div>
+    </section>
+    
+    <script>
+        let videos = [];
+        let stories = [];
+        let currentVideoData = null;
+        let currentTrendingIndex = 0;
+        let trendingVideos = [];
+        let isLiked = false;
+
+        
+        // Initialize the application
+        window.onload = function () {
+            videos = videoData;
+            trendingVideos = [...videos].sort((a, b) => b.views - a.views);
+
+            renderVideoGrid(videos, 'homeVideoGrid');
+            renderVideoGrid(videos, 'videoGrid');
+            renderTrendingPlayer();
+            setupTrendingNavigation();
+        };
+
+        // Show/hide section
+        function showSection(sectionId) {
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.remove('active');
+            });
+            document.getElementById(sectionId).classList.add('active');
+
+            document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                if (btn.textContent.toLowerCase().includes(sectionId)) {
+                    btn.classList.add('active');
+                }
+            });
+
+            // Auto-play trending video when section is shown
+            if (sectionId === 'trending') {
+                setTimeout(() => {
+                    const video = document.getElementById('trendingVideo');
+                    if (video) video.play();
+                }, 100);
+            }
+        }
+
+        // Filter functions
+        function filterContent(category) {
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            const filtered = category === 'all' ? videos : videos.filter(v => v.category === category);
+            renderVideoGrid(filtered, 'homeVideoGrid');
+        }
+
+        function filterVideos(type) {
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            let filtered = videos;
+            if (type === 'short') filtered = videos.filter(v => v.duration.startsWith('0:'));
+            else if (type === 'long') filtered = videos.filter(v => !v.duration.startsWith('0:'));
+            else if (type === 'popular') filtered = [...videos].sort((a, b) => b.views - a.views);
+            renderVideoGrid(filtered, 'videoGrid');
+        }
+
+        // Render video grid
+        function renderVideoGrid(data, containerId) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+
+            container.innerHTML = '';
+            data.forEach(video => {
+                const card = document.createElement('div');
+                card.className = 'video-card';
+                card.innerHTML = `
+                    <div class="video-thumbnail">
+                        <img src="${video.thumbnail}" alt="${video.title}">
+                        <div class="play-overlay" onclick="openVideoModal(${video.id})">
+                            <button class="play-btn">▶</button>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <div class="video-title">${video.title}</div>
+                        <div class="video-stats">
+                            <span>${video.views.toLocaleString()} views</span>
+                            <span>${video.duration}</span>
+                        </div>
+                        <div class="video-tags">
+                            ${video.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+                        </div>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        // Trending Player Functions
+        function renderTrendingPlayer() {
+            if (trendingVideos.length === 0) return;
+
+            const currentVideo = trendingVideos[currentTrendingIndex];
+            const videoElement = document.getElementById('trendingVideo');
+
+            videoElement.src = currentVideo.url;
+            document.getElementById('trendingTitle').textContent = currentVideo.title;
+            document.getElementById('trendingViews').textContent = `${currentVideo.views.toLocaleString()} views`;
+            document.getElementById('trendingLikes').textContent = `${currentVideo.likes.toLocaleString()} likes`;
+
+            const tagsContainer = document.getElementById('trendingTags');
+            tagsContainer.innerHTML = currentVideo.tags.map(tag => `<span class="tag">${tag}</span>`).join('');
+
+            currentVideoData = currentVideo;
+            isLiked = false;
+            updateLikeButton();
+        }
+
+        function setupTrendingNavigation() {
+            const dotsContainer = document.getElementById('navigationDots');
+            dotsContainer.innerHTML = '';
+
+            trendingVideos.forEach((_, index) => {
+                const dot = document.createElement('div');
+                dot.className = `dot ${index === currentTrendingIndex ? 'active' : ''}`;
+                dot.onclick = () => goToTrendingVideo(index);
+                dotsContainer.appendChild(dot);
+            });
+
+            // Auto-advance videos
+            setInterval(() => {
+                nextTrendingVideo();
+            }, 15000); // Change video every 15 seconds
+        }
+
+        function goToTrendingVideo(index) {
+            currentTrendingIndex = index;
+            renderTrendingPlayer();
+            updateNavigationDots();
+        }
+
+        function nextTrendingVideo() {
+            currentTrendingIndex = (currentTrendingIndex + 1) % trendingVideos.length;
+            renderTrendingPlayer();
+            updateNavigationDots();
+        }
+
+        function updateNavigationDots() {
+            document.querySelectorAll('.dot').forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentTrendingIndex);
+            });
+        }
+
+        // Action Functions
+        function toggleLike() {
+            isLiked = !isLiked;
+            updateLikeButton();
+
+            if (isLiked) {
+                currentVideoData.likes++;
+                document.getElementById('trendingLikes').textContent = `${currentVideoData.likes.toLocaleString()} likes`;
+            } else {
+                currentVideoData.likes--;
+                document.getElementById('trendingLikes').textContent = `${currentVideoData.likes.toLocaleString()} likes`;
+            }
+        }
+
+        function updateLikeButton() {
+            const likeBtn = document.getElementById('likeBtn');
+            likeBtn.classList.toggle('liked', isLiked);
+            likeBtn.innerHTML = isLiked ? '❤️' : '🤍';
+        }
+
+        function shareVideo() {
+            if (navigator.share) {
+                navigator.share({
+                    title: currentVideoData.title,
+                    text: currentVideoData.description,
+                    url: window.location.href
+                });
+            } else {
+                // Fallback for browsers that don't support Web Share API
+                const shareText = `Check out this viral video: ${currentVideoData.title}\n${window.location.href}`;
+                navigator.clipboard.writeText(shareText).then(() => {
+                    alert('Video link copied to clipboard!');
+                });
+            }
+        }
+
+        function downloadCurrentVideo() {
+            if (!currentVideoData) return;
+            const link = document.createElement('a');
+            link.href = currentVideoData.url;
+            link.download = `${currentVideoData.title}.mp4`;
+            link.click();
+        }
+
+        // Video Modal Functions
+        function openVideoModal(id) {
+            const video = videos.find(v => v.id === id);
+            if (!video) return;
+
+            currentVideoData = video;
+            document.getElementById('videoModal').classList.add('active');
+            document.getElementById('videoPlayer').innerHTML =
+                `<video width="100%" height="100%" controls autoplay>
+                    <source src="${video.url}" type="video/mp4">
+                </video>`;
+            document.getElementById('modalTitle').textContent = video.title;
+            document.getElementById('modalDescription').textContent = video.description;
+            document.getElementById('modalTags').innerHTML = video.tags.map(tag => `<span class="tag">${tag}</span>`).join(' ');
+        }
+
+        function closeModal() {
+            document.getElementById('videoModal').classList.remove('active');
+            document.getElementById('videoPlayer').innerHTML = '';
+            currentVideoData = null;
+        }
+
+        function playVideo() {
+            const video = document.querySelector('#videoPlayer video');
+            if (video) video.play();
+        }
+
+        function shareToInstagram() {
+            // Instagram sharing would require Instagram API integration
+            alert("Instagram sharing requires API integration. For now, you can copy the video URL.");
+        }
+
+        function downloadVideo() {
+            if (!currentVideoData) return;
+            const link = document.createElement('a');
+            link.href = currentVideoData.url;
+            link.download = `${currentVideoData.title}.mp4`;
+            link.click();
+        }
+
+        
+
+        // Touch/Swipe support for mobile
+        let touchStartY = 0;
+        let touchEndY = 0;
+
+        document.getElementById('trendingContainer').addEventListener('touchstart', function (e) {
+            touchStartY = e.changedTouches[0].screenY;
+        });
+
+        document.getElementById('trendingContainer').addEventListener('touchend', function (e) {
+            touchEndY = e.changedTouches[0].screenY;
+            handleSwipe();
+        });
+
+        function handleSwipe() {
+            const swipeThreshold = 50;
+            const diff = touchStartY - touchEndY;
+
+            if (Math.abs(diff) > swipeThreshold) {
+                if (diff > 0) {
+                    // Swipe up - next video
+                    nextTrendingVideo();
+                } else {
+                    // Swipe down - previous video
+                    const prevIndex = currentTrendingIndex === 0 ? trendingVideos.length - 1 : currentTrendingIndex - 1;
+                    goToTrendingVideo(prevIndex);
+                }
+            }
+        }
+
+    </script>
+</body>
+
+</html>
