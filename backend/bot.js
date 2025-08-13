@@ -11,7 +11,7 @@ bot.on('video', async ctx => {
   const video = ctx.message.video;
   const caption = ctx.message.caption || '';
   
-  // Simple parsing: first line = title, rest = description, hashtags = tags
+ 
   const lines = caption.split('\n');
   const title = lines[0] || 'Untitled Video';
   const description = lines.slice(1).join(' ').replace(/#\w+/g, '').trim();
@@ -20,7 +20,7 @@ bot.on('video', async ctx => {
   // Only save reference (not file), but you keep the file_id for later fetching
   await Video.create({
     file_id: video.file_id,
-    title,
+    title: video.title,
     description,
     tags,
     video_length: video.duration

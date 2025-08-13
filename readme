@@ -1,3 +1,8 @@
+//  npm install   install all the dependencies
+
 //  node bot.js   run this to start the bot
 
 //  node server.js   run this to start the API server
+
+// when we run make sure that we are in backend path 
+// when it show the issue we have to check if our ip is register in mongodb atlas 

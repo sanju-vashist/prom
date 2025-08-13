@@ -15,9 +15,9 @@ app.get('/api/videos', async (req, res) => {
   res.json(videos);
 });
 
-// Get Telegram video streaming URL (simple proxy)
+
 app.get('/api/video-file/:file_id', async (req, res) => {
-  // You fetch the file link from Telegram via bot API (for demo purposes only)
+  
   const TELEGRAM_API = `https://api.telegram.org/bot${process.env.TELEGRAM_TOKEN}/getFile?file_id=${req.params.file_id}`;
   const fileResp = await fetch(TELEGRAM_API).then(r => r.json());
   const filePath = fileResp.result.file_path;

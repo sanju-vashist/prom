@@ -1,9 +1,9 @@
 
-        let telegramVideos = []; // Store videos from your backend
-        let filteredVideos = []; // Store filtered videos
+        let telegramVideos = []; 
+        let filteredVideos = []; 
         let currentVideoData = null;
 
-        // Your original important video loading function
+        
         async function loadVideos() {
             try {
                 // Show loading state
@@ -19,10 +19,10 @@
                 telegramVideos = fetchedVideos;
                 filteredVideos = fetchedVideos;
                 
-                // Render videos in home section (2 per row)
+            
                 renderHomeVideos(fetchedVideos);
                 
-                // Render videos in all videos section
+               
                 renderAllVideos(fetchedVideos);
                 
             } catch (e) {
@@ -41,7 +41,7 @@
             }
         }
 
-        // Render videos in home section (2 per row layout)
+        
         function renderHomeVideos(videos) {
             const container = document.getElementById('homeVideoGrid');
             if (!videos || videos.length === 0) {
@@ -84,7 +84,7 @@
             });
         }
 
-        // Render all videos in the videos section
+       
         function renderAllVideos(videos) {
             const container = document.getElementById('videos');
             if (!videos || videos.length === 0) {
@@ -128,14 +128,14 @@
             });
         }
 
-        // Helper function to escape HTML
+     
         function escapeHtml(text) {
             const div = document.createElement('div');
             div.textContent = text;
             return div.innerHTML;
         }
 
-        // Function to open modal for Telegram videos
+        
         function openTelegramVideoModal(fileId, title, description, tags, duration) {
             currentVideoData = {
                 id: fileId,
@@ -157,12 +157,12 @@
             document.getElementById('modalTags').innerHTML = tags.split(', ').map(tag => `<span class="tag">#${tag}</span>`).join(' ');
         }
 
-        // Initialize the application
+       
         window.onload = function () {
-            loadVideos(); // Your important function
+            loadVideos(); 
         };
 
-        // Show/hide section
+      
         function showSection(sectionId) {
             document.querySelectorAll('.section').forEach(section => {
                 section.classList.remove('active');
@@ -177,7 +177,7 @@
             });
         }
 
-        // Filter functions for home
+      
         function filterHomeVideos(type) {
             document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
             event.target.classList.add('active');
@@ -188,13 +188,13 @@
             } else if (type === 'long') {
                 filtered = telegramVideos.filter(v => v.video_length >= 60);
             } else if (type === 'recent') {
-                filtered = [...telegramVideos].reverse(); // Reverse to show newest first
+                filtered = [...telegramVideos].reverse(); 
             }
             
             renderHomeVideos(filtered);
         }
 
-        // Filter functions for all videos section
+        
         function filterVideos(type) {
             document.querySelectorAll('#videos').closest('section').querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
             event.target.classList.add('active');
@@ -252,14 +252,14 @@
             document.body.removeChild(link);
         }
 
-        // Close modal when clicking outside
+       
         document.getElementById('videoModal').addEventListener('click', function(e) {
             if (e.target === this) {
                 closeModal();
             }
         });
 
-        // Keyboard navigation
+       
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') {
                 closeModal();
