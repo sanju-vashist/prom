@@ -1,9 +1,13 @@
+
 {
   "name": "prom",
   "version": "1.0.0",
   "main": "bot.js",
   "scripts": {
-    "start": "node bot.js",
+    "start": "node server.js",  
+    "bot": "node bot.js",      
     "dev": "nodemon bot.js"
+  },
+  "dependencies": {
   }
 }

@@ -15,7 +15,6 @@ app.get('/api/videos', async (req, res) => {
   res.json(videos);
 });
 
-
 app.get('/api/video-file/:file_id', async (req, res) => {
   
   const TELEGRAM_API = `https://api.telegram.org/bot${process.env.TELEGRAM_TOKEN}/getFile?file_id=${req.params.file_id}`;
@@ -27,6 +26,5 @@ app.get('/api/video-file/:file_id', async (req, res) => {
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`API running at http://localhost:${PORT}`));
-
 
 const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));

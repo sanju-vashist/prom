@@ -17,7 +17,6 @@ bot.on('video', async ctx => {
   const description = lines.slice(1).join(' ').replace(/#\w+/g, '').trim();
   const tags = (caption.match(/#\w+/g) || []).map(t => t.substring(1));
 
-  // Only save reference (not file), but you keep the file_id for later fetching
   await Video.create({
     file_id: video.file_id,
     title: video.title,

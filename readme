@@ -1,8 +1,41 @@
-//  npm install   install all the dependencies
+# 💫 piracy website : <br>
+##**The things that fasinate me are how the websites with no money no face no support compete with the big giants like netflix prime etc , 
+<brI just thought it was going to be very difficult and ya it is but lets make a meesho verson for it cheap but working god for us .**
+This is the project I created to show how piracy is done — for free or at minimum cost — and how piracy websites actually work.
+<br><br>It is very simple to create, easy to run, and requires almost no manual effort.
+<br>Everything is fully automated. You just send a movie to a Telegram group and the rest is done automatically.
+<br><br>The same system can also be used for other purposes, such as:
+<br><br>Storing data as a backup<br><br>Sharing files with friends
+<br><br>You only need to change the code slightly.
+<br><br>If you want to use it privately, you can:
+<br><br>Add a password or authentication
+<br><br>Restrict access
+<br><br>With small changes, you can create your own free unlimited drive.
+<br><br>Setup Instructions
+<br># Go to backend folder
+<br>cd backend
+<br><br># Install all dependencies
+<br>npm install
+<br><br># Start the Telegram bot<br>node bot.js
+<br><br># Start the API server<br>node server.js
+<br><br><br>Make sure you are inside the backend directory while running these commands.
+<br><br>Common Issue<br><br>If you face any issues while running the project:
+<br><br>Check whether your IP address is registered in MongoDB Atlas
+<br><br>If not, add it to the whitelist
+<br><br>Restart the bot and server
 
-//  node bot.js   run this to start the bot
 
-//  node server.js   run this to start the API server
+<br><br>
+#.env File Configuration
+<br><br>Create a .env file in the backend directory and add the following variables:
+<br><br>TELEGRAM_BOT_TOKEN=your_telegram_bot_token
+<br>MONGODB_URI=your_mongodb_connection_string
+<br>API_BASE_URL=http://localhost:3000
+<br>PORT=3000 
 
-// when we run make sure that we are in backend path 
-// when it show the issue we have to check if our ip is register in mongodb atlas 
+# 💻 Tech Stack:
+![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E) ![Vercel](https://img.shields.io/badge/vercel-%23000000.svg?style=for-the-badge&logo=vercel&logoColor=white) ![FastAPI](https://img.shields.io/badge/FastAPI-005571?style=for-the-badge&logo=fastapi) ![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white) ![MongoDB](https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white) ![SQLite](https://img.shields.io/badge/sqlite-%2307405e.svg?style=for-the-badge&logo=sqlite&logoColor=white)
+# 📊 GitHub Stats:
+![](https://github-readme-stats.vercel.app/api?username=sanju&theme=dark&hide_border=false&include_all_commits=false&count_private=false)<br/>
+![](https://nirzak-streak-stats.vercel.app/?user=sanju&theme=dark&hide_border=false)<br/>
+![](https://github-readme-stats.vercel.app/api/top-langs/?username=sanju&theme=dark&hide_border=false&include_all_commits=false&count_private=false&layout=compact)
