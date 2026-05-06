@@ -1,4 +1,6 @@
 
+        const API_BASE_URL = 'https://prom-9305.onrender.com'; // ✅ Updated with your live backend URL
+        
         let telegramVideos = []; 
         let filteredVideos = []; 
         let currentVideoData = null;
@@ -14,7 +16,7 @@
                     </div>
                 `;
                 
-                const res = await fetch('http://localhost:5000/api/videos');
+                const res = await fetch(`${API_BASE_URL}/api/videos`);
                 const fetchedVideos = await res.json();
                 telegramVideos = fetchedVideos;
                 filteredVideos = fetchedVideos;
@@ -29,7 +31,7 @@
                 const errorHtml = `
                     <div class="error-message" style="grid-column: 1 / -1;">
                         <h3>⚠️ Could not load videos</h3>
-                        <p>Please check that your backend server is running on http://localhost:5000</p>
+                        <p>Please check that your backend server is running on ${API_BASE_URL}</p>
                         <button onclick="loadVideos()" style="margin-top: 1rem; padding: 0.5rem 1rem; background: rgba(255,255,255,0.2); border: none; color: white; border-radius: 5px; cursor: pointer;">
                             🔄 Try Again
                         </button>
@@ -60,7 +62,7 @@
                 card.innerHTML = `
                     <div class="video-thumbnail">
                         <video preload="metadata">
-                            <source src="http://localhost:5000/api/video-file/${v.file_id}" type="video/mp4">
+                            <source src="${API_BASE_URL}/api/video-file/${v.file_id}" type="video/mp4">
                         </video>
                         <div class="play-overlay" onclick="openTelegramVideoModal('${v.file_id}', '${escapeHtml(v.title)}', '${escapeHtml(v.description)}', '${Array.isArray(v.tags) ? v.tags.join(', ') : v.tags}', '${v.video_length}')">
                             <button class="play-btn">▶</button>
@@ -104,7 +106,7 @@
                 card.innerHTML = `
                     <div class="video-thumbnail">
                         <video preload="metadata">
-                            <source src="http://localhost:5000/api/video-file/${v.file_id}" type="video/mp4">
+                            <source src="${API_BASE_URL}/api/video-file/${v.file_id}" type="video/mp4">
                         </video>
                         <div class="play-overlay" onclick="openTelegramVideoModal('${v.file_id}', '${escapeHtml(v.title)}', '${escapeHtml(v.description)}', '${Array.isArray(v.tags) ? v.tags.join(', ') : v.tags}', '${v.video_length}')">
                             <button class="play-btn">▶</button>
@@ -143,13 +145,13 @@
                 description: description,
                 tags: tags.split(', '),
                 duration: duration + 's',
-                url: `http://localhost:5000/api/video-file/${fileId}`
+                url: `${API_BASE_URL}/api/video-file/${fileId}`
             };
             
             document.getElementById('videoModal').classList.add('active');
             document.getElementById('videoPlayer').innerHTML =
                 `<video width="100%" height="100%" controls autoplay>
-                    <source src="http://localhost:5000/api/video-file/${fileId}" type="video/mp4">
+                    <source src="${API_BASE_URL}/api/video-file/${fileId}" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>`;
             document.getElementById('modalTitle').textContent = title;
