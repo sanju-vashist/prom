@@ -7,7 +7,15 @@ require('dotenv').config();
 const app = express();
 app.use(cors());
 
-mongoose.connect(process.env.MONGODB_URI);
+mongoose.connect(process.env.MONGODB_URI)
+  .then(() => console.log('✅ Connected to MongoDB Atlas'))
+  .catch(err => {
+    console.error('❌ MongoDB Connection Error:', err.message);
+    // Log more details if it's a DNS issue
+    if (err.message.includes('ENOTFOUND')) {
+      console.error('👉 Hint: Check your MONGODB_URI in Render settings and ensure your MongoDB Atlas IP Whitelist allows 0.0.0.0/0');
+    }
+  });
 
 // List all videos
 app.get('/api/videos', async (req, res) => {
